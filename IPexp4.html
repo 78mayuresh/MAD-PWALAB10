@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;}
+    .container {
+      background-color: #fff;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);}
+    .center-content {
+      text-align: center;}
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;}
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;}
+    
+    input[type="radio"] {
+      margin-right: 1px;}
+  
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;}
+       input[type="submit"]:hover {
+      background-color: #0056b3;}
+        .error {
+      color: red;
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 10px;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="center-content">
+      <h1>ENROLLMENT FORM</h1>
+      <img src="Register.png" alt="Registration">
+    </div>
+    <form name="f1" method="post" action="" onsubmit="return validateForm()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="address">Address:</label>
+      <textarea rows="2" id="address" name="address"></textarea>
+      <label for="email">Email ID:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="date">Date of Birth:</label>
+      <input type="date" id="date" name="date">
+      <label for="mobile">Mobile Number:</label>
+      <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+      <small>(10 digits without spaces or dashes)</small>
+      <br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" minlength="6" required>
+      <label>Gender:</label>
+      <input type="radio" id="male" name="gender" value="Male" required>
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="Female" required>
+      <label for="female">Female</label>
+      <div class="error" id="error-message"></div>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <script>
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var mobile = document.getElementById('mobile').value;
+      if (name == null || name === "") {
+        showError("Name can't be blank");
+        return false;
+      } else if (mobile.length !== 10) {
+        showError("Mobile number must be 10 digits long.");
+        return false;
+      } else if (!isValidEmail(email)) {
+        showError("Invalid email address");
+        return false;}
+      return true;}
+    function isValidEmail(email) {
+      var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailPattern.test(email)    }
+    function showError(message) {
+      var errorMessage = document.getElementById('error-message');
+      errorMessage.innerHTML = message; }
+  </script>
+</body>
+</html>
+
